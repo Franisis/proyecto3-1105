@@ -1,4 +1,4 @@
-
+from math import sqrt
 import sys
 
 def cargar_datos():
@@ -7,7 +7,7 @@ def cargar_datos():
     
     # Primera línea: número de casos de prueba
     num_casos = int(entrada[0])
-    print(f"Cantidad de casos de prueba: {num_casos}\n")
+    
     
     casos = []
     idx = 1  # Índice para recorrer las líneas de entrada
@@ -17,7 +17,7 @@ def cargar_datos():
         n, d = map(int, entrada[idx].split())
         idx += 1
         
-        print(f"Caso con n={n}, d={d}")
+        
         
         celulas = []
         for _ in range(n):
@@ -39,10 +39,37 @@ def cargar_datos():
     
     return casos
 
+def calcularDistancia(celula1, celula2):
+    # Calcula la distancia entre celulas basadas en las coordenadas
+    return sqrt((celula1[1] - celula2[1]) ** 2 + (celula1[2] - celula2[2]) ** 2)
+
+def buscarCoincidencias(celula1, celula2):
+    peptidos1 = celula1[3]
+    peptidos2 = celula2[3]
+    
+
+    coincidencias = [elemento for elemento in peptidos1 if elemento in peptidos2]
+    return len(coincidencias)
+
+
+    
+def pares(numcCelulas, distancia, caso):
+    memo = []
+    for celula in caso:
+        for celula2 in caso:
+            # d almacena la distancia entre las 2 celulas
+            d = calcularDistancia(celula, celula2)
+            # se comprueba que no se opera en la misma celula y la distancia calculada (d) es menor
+            if celula != celula2 and d <= distancia:
+                # se calcula la cantidad de coincidencias entre las 2 celulas
+                print(buscarCoincidencias(celula, celula2))
+                print(celula[0], celula2[0])
+                
+
 
 if __name__ == "__main__":
     casos = cargar_datos()
     for numCelulas,distancia,caso in casos:
-        print(numCelulas)
-        print(distancia)
-        print(caso)
+        print('numero de celulas: ', numCelulas)
+        print('distancia: ',distancia)
+        pares(numCelulas,distancia,caso)  # Llamar a la función
