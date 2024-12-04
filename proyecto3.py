@@ -51,19 +51,42 @@ def buscarCoincidencias(celula1, celula2):
     coincidencias = [elemento for elemento in peptidos1 if elemento in peptidos2]
     return len(coincidencias)
 
-
     
-def pares(numcCelulas, distancia, caso):
+def pares(numCelulas, distancia, caso):
     memo = []
+    
+    allpairs= [] 
+    pairs=[]
+    #lista de tuplas que muestra los grupos a 
+    #los que pertenencen las celulas segun el indice
     for celula in caso:
         for celula2 in caso:
             # d almacena la distancia entre las 2 celulas
             d = calcularDistancia(celula, celula2)
             # se comprueba que no se opera en la misma celula y la distancia calculada (d) es menor
-            if celula != celula2 and d <= distancia:
+            numerodeMensajes=(buscarCoincidencias(celula, celula2))
+            if celula != celula2 and d <= distancia and numerodeMensajes>0:
                 # se calcula la cantidad de coincidencias entre las 2 celulas
-                print(buscarCoincidencias(celula, celula2))
-                print(celula[0], celula2[0])
+                
+                # numero de mensajes me cuenta masomenos el peso del arco entre las 2 celulas
+                allpairs.append(
+                    {
+                        "celula1": celula[0],
+                        "celula2": celula2[0],
+                        "distancia": d,
+                        "mensajes": numerodeMensajes,
+                        'shared' : list(
+                            set(celula[3]) & set(celula2[3])
+                            )
+                    }
+                )
+    for pair in allpairs:
+        #verificar si alguno de los pares no está en memo
+        print(pair)
+        
+            
+
+                
                 
 
 

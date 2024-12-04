@@ -1,14 +1,54 @@
-Cantidad de casos de prueba: 3
-
-Caso con n=7, d=1
-Caso con n=7, d=2
-Caso con n=4, d=1
-7
-1
-[(1, 0, 0, ['AETQT', 'DFTYA', 'PHLYT']), (2, 0, 2, ['DSQTS', 'IYHLK', 'LHGPS', 'LTLLS']), (3, 1, 0, ['AETQT', 'DFTYA', 'HGCYS', 'LSVGG', 'SRFNH']), (4, 1, 1, ['DFTYA', 'HGCYS', 'IYHLK', 'SRFNH']), (5, 1, 2, ['DSQTS', 'IYHLK', 'LSVGG', 'LTLLS', 'TTVTG']), (6, 2, 1, ['AETQT', 'HGCYS', 'IYHLK', 'LSVGG', 'LTLLS']), (7, 2, 2, ['HGCYS', 'SRFNH', 'TTVTG'])]
-7
-2
-[(1, 0, 0, ['AETQT', 'DFTYA', 'PHLYT']), (2, 0, 2, ['DSQTS', 'IYHLK', 'LHGPS', 'LTLLS']), (3, 1, 0, ['AETQT', 'DFTYA', 'HGCYS', 'LSVGG', 'SRFNH']), (4, 1, 1, ['DFTYA', 'HGCYS', 'IYHLK', 'SRFNH']), (5, 1, 2, ['DSQTS', 'IYHLK', 'LSVGG', 'LTLLS', 'TTVTG']), (6, 2, 1, ['AETQT', 'HGCYS', 'IYHLK', 'LSVGG', 'LTLLS']), (7, 2, 2, ['HGCYS', 'SRFNH', 'TTVTG'])]
-4
-1
-[(1, 0, 0, ['AETQT', 'DFTYA']), (2, 0, 1, ['AETQT', 'HGCYS']), (3, 1, 0, ['DFTYA', 'IYHLK']), (4, 1, 1, ['HGCYS', 'IYHLK'])]
+numero de celulas:  7
+distancia:  1
+{'celula1': 1, 'celula2': 3, 'distancia': 1.0, 'mensajes': 2, 'shared': ['DFTYA', 'AETQT']}
+{'celula1': 2, 'celula2': 5, 'distancia': 1.0, 'mensajes': 3, 'shared': ['DSQTS', 'LTLLS', 'IYHLK']}
+{'celula1': 3, 'celula2': 1, 'distancia': 1.0, 'mensajes': 2, 'shared': ['DFTYA', 'AETQT']}
+{'celula1': 3, 'celula2': 4, 'distancia': 1.0, 'mensajes': 3, 'shared': ['HGCYS', 'SRFNH', 'DFTYA']}
+{'celula1': 4, 'celula2': 3, 'distancia': 1.0, 'mensajes': 3, 'shared': ['HGCYS', 'SRFNH', 'DFTYA']}
+{'celula1': 4, 'celula2': 5, 'distancia': 1.0, 'mensajes': 1, 'shared': ['IYHLK']}
+{'celula1': 4, 'celula2': 6, 'distancia': 1.0, 'mensajes': 2, 'shared': ['HGCYS', 'IYHLK']}
+{'celula1': 5, 'celula2': 2, 'distancia': 1.0, 'mensajes': 3, 'shared': ['DSQTS', 'LTLLS', 'IYHLK']}
+{'celula1': 5, 'celula2': 4, 'distancia': 1.0, 'mensajes': 1, 'shared': ['IYHLK']}
+{'celula1': 5, 'celula2': 7, 'distancia': 1.0, 'mensajes': 1, 'shared': ['TTVTG']}
+{'celula1': 6, 'celula2': 4, 'distancia': 1.0, 'mensajes': 2, 'shared': ['HGCYS', 'IYHLK']}
+{'celula1': 6, 'celula2': 7, 'distancia': 1.0, 'mensajes': 1, 'shared': ['HGCYS']}
+{'celula1': 7, 'celula2': 5, 'distancia': 1.0, 'mensajes': 1, 'shared': ['TTVTG']}
+{'celula1': 7, 'celula2': 6, 'distancia': 1.0, 'mensajes': 1, 'shared': ['HGCYS']}
+numero de celulas:  7
+distancia:  2
+{'celula1': 1, 'celula2': 3, 'distancia': 1.0, 'mensajes': 2, 'shared': ['DFTYA', 'AETQT']}
+{'celula1': 1, 'celula2': 4, 'distancia': 1.4142135623730951, 'mensajes': 1, 'shared': ['DFTYA']}
+{'celula1': 2, 'celula2': 4, 'distancia': 1.4142135623730951, 'mensajes': 1, 'shared': ['IYHLK']}
+{'celula1': 2, 'celula2': 5, 'distancia': 1.0, 'mensajes': 3, 'shared': ['DSQTS', 'LTLLS', 'IYHLK']}
+{'celula1': 3, 'celula2': 1, 'distancia': 1.0, 'mensajes': 2, 'shared': ['DFTYA', 'AETQT']}
+{'celula1': 3, 'celula2': 4, 'distancia': 1.0, 'mensajes': 3, 'shared': ['HGCYS', 'SRFNH', 'DFTYA']}
+{'celula1': 3, 'celula2': 5, 'distancia': 2.0, 'mensajes': 1, 'shared': ['LSVGG']}
+{'celula1': 3, 'celula2': 6, 'distancia': 1.4142135623730951, 'mensajes': 3, 'shared': ['HGCYS', 'LSVGG', 'AETQT']}
+{'celula1': 4, 'celula2': 1, 'distancia': 1.4142135623730951, 'mensajes': 1, 'shared': ['DFTYA']}
+{'celula1': 4, 'celula2': 2, 'distancia': 1.4142135623730951, 'mensajes': 1, 'shared': ['IYHLK']}
+{'celula1': 4, 'celula2': 3, 'distancia': 1.0, 'mensajes': 3, 'shared': ['HGCYS', 'SRFNH', 'DFTYA']}
+{'celula1': 4, 'celula2': 5, 'distancia': 1.0, 'mensajes': 1, 'shared': ['IYHLK']}
+{'celula1': 4, 'celula2': 6, 'distancia': 1.0, 'mensajes': 2, 'shared': ['HGCYS', 'IYHLK']}
+{'celula1': 4, 'celula2': 7, 'distancia': 1.4142135623730951, 'mensajes': 2, 'shared': ['HGCYS', 'SRFNH']}
+{'celula1': 5, 'celula2': 2, 'distancia': 1.0, 'mensajes': 3, 'shared': ['DSQTS', 'LTLLS', 'IYHLK']}
+{'celula1': 5, 'celula2': 3, 'distancia': 2.0, 'mensajes': 1, 'shared': ['LSVGG']}
+{'celula1': 5, 'celula2': 4, 'distancia': 1.0, 'mensajes': 1, 'shared': ['IYHLK']}
+{'celula1': 5, 'celula2': 6, 'distancia': 1.4142135623730951, 'mensajes': 3, 'shared': ['LSVGG', 'LTLLS', 'IYHLK']}
+{'celula1': 5, 'celula2': 7, 'distancia': 1.0, 'mensajes': 1, 'shared': ['TTVTG']}
+{'celula1': 6, 'celula2': 3, 'distancia': 1.4142135623730951, 'mensajes': 3, 'shared': ['HGCYS', 'LSVGG', 'AETQT']}
+{'celula1': 6, 'celula2': 4, 'distancia': 1.0, 'mensajes': 2, 'shared': ['HGCYS', 'IYHLK']}
+{'celula1': 6, 'celula2': 5, 'distancia': 1.4142135623730951, 'mensajes': 3, 'shared': ['LSVGG', 'LTLLS', 'IYHLK']}
+{'celula1': 6, 'celula2': 7, 'distancia': 1.0, 'mensajes': 1, 'shared': ['HGCYS']}
+{'celula1': 7, 'celula2': 4, 'distancia': 1.4142135623730951, 'mensajes': 2, 'shared': ['HGCYS', 'SRFNH']}
+{'celula1': 7, 'celula2': 5, 'distancia': 1.0, 'mensajes': 1, 'shared': ['TTVTG']}
+{'celula1': 7, 'celula2': 6, 'distancia': 1.0, 'mensajes': 1, 'shared': ['HGCYS']}
+numero de celulas:  4
+distancia:  1
+{'celula1': 1, 'celula2': 2, 'distancia': 1.0, 'mensajes': 1, 'shared': ['AETQT']}
+{'celula1': 1, 'celula2': 3, 'distancia': 1.0, 'mensajes': 1, 'shared': ['DFTYA']}
+{'celula1': 2, 'celula2': 1, 'distancia': 1.0, 'mensajes': 1, 'shared': ['AETQT']}
+{'celula1': 2, 'celula2': 4, 'distancia': 1.0, 'mensajes': 1, 'shared': ['HGCYS']}
+{'celula1': 3, 'celula2': 1, 'distancia': 1.0, 'mensajes': 1, 'shared': ['DFTYA']}
+{'celula1': 3, 'celula2': 4, 'distancia': 1.0, 'mensajes': 1, 'shared': ['IYHLK']}
+{'celula1': 4, 'celula2': 2, 'distancia': 1.0, 'mensajes': 1, 'shared': ['HGCYS']}
+{'celula1': 4, 'celula2': 3, 'distancia': 1.0, 'mensajes': 1, 'shared': ['IYHLK']}
