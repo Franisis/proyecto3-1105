@@ -105,6 +105,7 @@ def createPairs(distancia, caso,allPairs):
             primero necesitamos ver si hay camino entre los pares dentro de pairs
             de lo contrario creamos un nuevo par con nextCell [cell, nextCell], pero si nextCell ya está en memo se añade el cell solo como [cell]
             """
+            print(cell)
             for group in groups:
                 if cell not in group:
                     spmm=sepuedenMandarmensajes(group, cell, caso, distancia)
@@ -115,16 +116,7 @@ def createPairs(distancia, caso,allPairs):
                     elif cell not in memo and nextCell not in memo:
                         groups.append([cell])
                         memo.add(cell)
-                            
-
-                
-            
-            
-                
-                        
-
                     
-
                     
     print(memo)
     return groups                    
@@ -154,10 +146,15 @@ def sepuedenMandarmensajes(group, cell,caso,distancia):
         
         if len(celulaCompletaConjunto.intersection(completeCellConjunto))>0 and d<=distancia :
             #se suma +1 debido a que 
-            print(group[0], cell, distancia)    
+            
             determinante+=1
 
     else:
+        """
+        primero necesitamos encontrar las coincidencias que hay en el grupo, es decir
+        si comparten una cierta cantidad de peptidos una vez compartan cierta cantidad 
+        toca revisar si la celula que estamos comparando tiene la misma cantidad de celulas que la original.
+        """
         for celula in group:
             celulaCompleta=buscarCelula(caso,celula)
             #Se hacen conjuntos con la celula completa y complete cell y comprobar
@@ -167,7 +164,7 @@ def sepuedenMandarmensajes(group, cell,caso,distancia):
             
             if len(celulaCompletaConjunto.intersection(completeCellConjunto))>0 and d<=distancia :
                 #se suma +1 debido a que 
-                print(celula, cell, distancia)    
+                
                 determinante+=1
     if determinante==len(group):
         return True
