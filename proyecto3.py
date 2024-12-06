@@ -105,7 +105,7 @@ def createPairs(distancia, caso,allPairs):
             primero necesitamos ver si hay camino entre los pares dentro de pairs
             de lo contrario creamos un nuevo par con nextCell [cell, nextCell], pero si nextCell ya está en memo se añade el cell solo como [cell]
             """
-            print(cell)
+            
             for group in groups:
                 if cell not in group:
                     spmm=sepuedenMandarmensajes(group, cell, caso, distancia)
@@ -118,8 +118,8 @@ def createPairs(distancia, caso,allPairs):
                         memo.add(cell)
                     
                     
-    print(memo)
-    return groups                    
+    
+    return groups, memo
     
     #funcion que me permite encontrar 1 celula dentro del caso dado su id
 def buscarCelula(caso, id):
@@ -180,7 +180,7 @@ def sepuedenMandarmensajes(group, cell,caso,distancia):
             celulaCompletaConjunto = set(celulaCompleta[3])
             completeCellConjunto = set(completeCell[3])
             d=calcularDistancia(completeCell, celulaCompleta)
-            print(celulaCompletaConjunto.intersection(completeCellConjunto),coincidenciasGrupo, group, celula)
+            
             if len(celulaCompletaConjunto.intersection(completeCellConjunto))>=len(coincidenciasGrupo) and d<=distancia :
                 #se suma +1 debido a que      
                 determinante+=1
@@ -189,13 +189,17 @@ def sepuedenMandarmensajes(group, cell,caso,distancia):
     else:
         return False
      
-
+def findGroupNumber(pairs, id):
+    #se busca la celula por la id y se retorna al grupo al que pertenece
+    for pair in pairs:
+        if id in pair:
+            return id, pairs.index(pair)
         
 if __name__ == "__main__":
     casos = cargar_datos()
     for numCelulas,distancia,caso in casos:
-        print('numero de celulas: ', numCelulas)
-        print('distancia: ',distancia)
         allpairs=pares(numCelulas,distancia,caso)  # Llamar a la función
-        pairs=createPairs(distancia,caso,allpairs)
-        print(pairs)
+        pairs,memo=createPairs(distancia,caso,allpairs)
+        for id in memo:
+            id,groupid=findGroupNumber(pairs,id)
+            print(f'{id} {groupid+1}')
