@@ -125,8 +125,23 @@ def createPairs(distancia, caso,allPairs):
 def buscarCelula(caso, id):
     return [celula for celula in caso if celula[0]==id ][0]
 
-def buscarCelulaEnAllPairs(allpairs,id):
-    return [pair for pair in allpairs if list(pair.keys())[0]==id ]
+def buscarCelulaEnAllPairs(allpairs,id, idnext):
+    return [pair for pair in allpairs if list(pair.keys())[0]==id and pair[list(pair.keys())[0]]['siguiente'] ==idnext ]
+
+def coincidenciasMaximasGrupo(group, allpairs,caso):
+    
+    coincidencias=set({})
+    for cell in group:
+        cellInfo=buscarCelula(caso,cell)
+        peptides= cellInfo[3]
+        if len(coincidencias)==0:
+            for peptide in peptides:
+                coincidencias.add(peptide)
+        else:
+            coincidencias = coincidencias & set(peptides)
+            
+    return coincidencias
+        
 
 def sepuedenMandarmensajes(group, cell,caso,distancia):
     """
@@ -153,31 +168,27 @@ def sepuedenMandarmensajes(group, cell,caso,distancia):
         """
         primero necesitamos encontrar las coincidencias que hay en el grupo, es decir
         si comparten una cierta cantidad de peptidos una vez compartan cierta cantidad 
-        toca revisar si la celula que estamos comparando tiene la misma cantidad de celulas que la original.
+        toca revisar si la celula que estamos comparando tiene la misma cantidad de celulas que la pareja original.
         """
+
+        #coincidencias dentro del grupo es un set 
+        coincidenciasGrupo = coincidenciasMaximasGrupo(group, allpairs,caso)
+        
         for celula in group:
             celulaCompleta=buscarCelula(caso,celula)
             #Se hacen conjuntos con la celula completa y complete cell y comprobar
             celulaCompletaConjunto = set(celulaCompleta[3])
             completeCellConjunto = set(completeCell[3])
             d=calcularDistancia(completeCell, celulaCompleta)
-            
-            if len(celulaCompletaConjunto.intersection(completeCellConjunto))>0 and d<=distancia :
-                #se suma +1 debido a que 
-                
+            print(celulaCompletaConjunto.intersection(completeCellConjunto),coincidenciasGrupo, group, celula)
+            if len(celulaCompletaConjunto.intersection(completeCellConjunto))>=len(coincidenciasGrupo) and d<=distancia :
+                #se suma +1 debido a que      
                 determinante+=1
     if determinante==len(group):
         return True
     else:
         return False
-    
-
-                
-        
-    
-    
-        
-
+     
 
         
 if __name__ == "__main__":
