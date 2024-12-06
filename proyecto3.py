@@ -1,5 +1,10 @@
 from math import sqrt
+
 import sys
+
+
+
+
 
 def cargar_datos():
     # Leer la entrada estándar
@@ -54,7 +59,6 @@ def buscarCoincidencias(celula1, celula2):
     
 def pares(numCelulas, distancia, caso):
     memo = []
-    
     allpairs= [] 
     pairs=[]
     #lista de tuplas que muestra los grupos a 
@@ -71,19 +75,55 @@ def pares(numCelulas, distancia, caso):
                 # numero de mensajes me cuenta masomenos el peso del arco entre las 2 celulas
                 allpairs.append(
                     {
-                        "celula1": celula[0],
-                        "celula2": celula2[0],
-                        "distancia": d,
+                        celula[0]: 
+                        {
+                        "siguiente": celula2[0],
+                        "distancia": round(d,3),
                         "mensajes": numerodeMensajes,
                         'shared' : list(
                             set(celula[3]) & set(celula2[3])
-                            )
+                            )}
                     }
+                    
                 )
-    for pair in allpairs:
-        #verificar si alguno de los pares no está en memo
-        print(pair)
+    
         
+        realPairs=[]
+        for pair in allpairs:
+            cell = list(pair.keys())[0]
+            nextCell = pair[cell]['siguiente']
+            if len(realPairs)==0:
+                realPairs.append([cell,nextCell])
+            else:
+                for rPair in realPairs:
+                    if cell not in rPair:
+                        """
+                        buscar dentro del caso celulas la celula completa
+                        """
+                        celulaCompleta = buscarCelulaCompleta(cell, caso)
+                        peptidos=celulaCompleta[3]
+                        areFriends=0
+                        for r in rPair:
+                            celulaCompletaPar = buscarCelulaCompleta(r, caso)
+                            numCoincidencias=buscarCoincidencias(celulaCompleta, celulaCompletaPar)
+                            if numCoincidencias>0:
+                                print(celulaCompleta, "es amigo de: ", celulaCompletaPar)
+                                areFriends+=1
+                        if areFriends==len(rPair):
+                            rPair.append(cell)
+                        else:
+                            realPairs.append([cell])
+    print(realPairs)
+def buscarCelulaCompleta(idCelula, caso):
+    return [celula for celula in caso if celula[0]==idCelula][0]
+                
+        
+    
+    
+        
+
+def getCellfromAllPairs():
+    pass
             
 
                 
