@@ -100,23 +100,21 @@ def createPairs(distancia, caso,allPairs):
             memo.add(cell)
             memo.add(nextCell)
             groups.append([cell,nextCell])
-        elif (cell not in memo or nextCell in memo) and len(memo)>0:
+        elif cell not in memo  and len(memo)>0:
             """
             primero necesitamos ver si hay camino entre los pares dentro de pairs
             de lo contrario creamos un nuevo par con nextCell [cell, nextCell], pero si nextCell ya está en memo se añade el cell solo como [cell]
             """
-            if cell not in memo:
-                if nextCell in memo: 
-                    """
-                    Si la siguiente celula está en el memo, quiere decir que ya tiene pareja, verificar su pareja
-                    """
-                    for group in groups:
-                        if nextCell in group:
-                            """
-                            si la siguiente celula está en el grupo, verificar si la celula actual está en el
-                            grupo, si no está, agregarla al grupo
-                            """
-                            for idCon in groups
+            for group in groups:
+                if cell not in group:
+                    spmm=sepuedenMandarmensajes(group, cell, caso, distancia)
+                    if  spmm and cell not in memo:
+                        #verifica que se puedan mandar mensajes en el grupo
+                        group.append(cell)
+                        memo.add(cell)
+                    elif cell not in memo and nextCell not in memo:
+                        groups.append([cell])
+                        memo.add(cell)
                             
 
                 
@@ -137,6 +135,45 @@ def buscarCelula(caso, id):
 
 def buscarCelulaEnAllPairs(allpairs,id):
     return [pair for pair in allpairs if list(pair.keys())[0]==id ]
+
+def sepuedenMandarmensajes(group, cell,caso,distancia):
+    """
+    se pasa un grupo consolidado por parametro y una celula a comprobar
+    se retorna cuantas celulas del grupo coinciden con la celula a comprobar
+    """
+    #el determinante nos ayuda a mirar si se puede enviar mensajes entre celulas
+    determinante=0
+    completeCell = buscarCelula(caso,cell)
+
+    if len(group)==1:
+        celulaCompleta=buscarCelula(caso,group[0])
+
+        celulaCompletaConjunto = set(celulaCompleta[3])
+        completeCellConjunto = set(completeCell[3])
+        d=calcularDistancia(completeCell, celulaCompleta)
+        
+        if len(celulaCompletaConjunto.intersection(completeCellConjunto))>0 and d<=distancia :
+            #se suma +1 debido a que 
+            print(group[0], cell, distancia)    
+            determinante+=1
+
+    else:
+        for celula in group:
+            celulaCompleta=buscarCelula(caso,celula)
+            #Se hacen conjuntos con la celula completa y complete cell y comprobar
+            celulaCompletaConjunto = set(celulaCompleta[3])
+            completeCellConjunto = set(completeCell[3])
+            d=calcularDistancia(completeCell, celulaCompleta)
+            
+            if len(celulaCompletaConjunto.intersection(completeCellConjunto))>0 and d<=distancia :
+                #se suma +1 debido a que 
+                print(celula, cell, distancia)    
+                determinante+=1
+    if determinante==len(group):
+        return True
+    else:
+        return False
+    
 
                 
         
