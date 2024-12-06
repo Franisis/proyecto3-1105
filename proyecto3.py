@@ -58,9 +58,7 @@ def buscarCoincidencias(celula1, celula2):
 
     
 def pares(numCelulas, distancia, caso):
-    memo = []
     allpairs= [] 
-    pairs=[]
     #lista de tuplas que muestra los grupos a 
     #los que pertenencen las celulas segun el indice
     for celula in caso:
@@ -85,54 +83,74 @@ def pares(numCelulas, distancia, caso):
                             )}
                     }
                     
-                )
-    
-        
-        realPairs=[]
-        for pair in allpairs:
-            cell = list(pair.keys())[0]
-            nextCell = pair[cell]['siguiente']
-            if len(realPairs)==0:
-                realPairs.append([cell,nextCell])
-            else:
-                for rPair in realPairs:
-                    if cell not in rPair:
-                        """
-                        buscar dentro del caso celulas la celula completa
-                        """
-                        celulaCompleta = buscarCelulaCompleta(cell, caso)
-                        peptidos=celulaCompleta[3]
-                        areFriends=0
-                        for r in rPair:
-                            celulaCompletaPar = buscarCelulaCompleta(r, caso)
-                            numCoincidencias=buscarCoincidencias(celulaCompleta, celulaCompletaPar)
-                            if numCoincidencias>0:
-                                print(celulaCompleta, "es amigo de: ", celulaCompletaPar)
-                                areFriends+=1
-                        if areFriends==len(rPair):
-                            rPair.append(cell)
-                        else:
-                            realPairs.append([cell])
-    print(realPairs)
-def buscarCelulaCompleta(idCelula, caso):
-    return [celula for celula in caso if celula[0]==idCelula][0]
-                
-        
-    
-    
-        
+                )  
+    return allpairs
 
-def getCellfromAllPairs():
-    pass
+
+def createPairs(distancia, caso,allPairs):
+    memo = set({})
+    comparativeGroup=set({})
+    groups=[]
+    for pair in allPairs:
+        cell = list(pair.keys())[0]
+        nextCell=pair[cell]['siguiente']
+        
+        #crear primer par
+        if cell not in memo and nextCell not in memo and len(memo)==0:
+            memo.add(cell)
+            memo.add(nextCell)
+            groups.append([cell,nextCell])
+        elif (cell not in memo or nextCell in memo) and len(memo)>0:
+            """
+            primero necesitamos ver si hay camino entre los pares dentro de pairs
+            de lo contrario creamos un nuevo par con nextCell [cell, nextCell], pero si nextCell ya está en memo se añade el cell solo como [cell]
+            """
+            if cell not in memo:
+                if nextCell in memo: 
+                    """
+                    Si la siguiente celula está en el memo, quiere decir que ya tiene pareja, verificar su pareja
+                    """
+                    for group in groups:
+                        if nextCell in group:
+                            """
+                            si la siguiente celula está en el grupo, verificar si la celula actual está en el
+                            grupo, si no está, agregarla al grupo
+                            """
+                            for idCon in groups
+                            
+
+                
             
+            
+                
+                        
+
+                    
+
+                    
+    print(memo)
+    return groups                    
+    
+    #funcion que me permite encontrar 1 celula dentro del caso dado su id
+def buscarCelula(caso, id):
+    return [celula for celula in caso if celula[0]==id ][0]
+
+def buscarCelulaEnAllPairs(allpairs,id):
+    return [pair for pair in allpairs if list(pair.keys())[0]==id ]
 
                 
-                
+        
+    
+    
+        
 
 
+        
 if __name__ == "__main__":
     casos = cargar_datos()
     for numCelulas,distancia,caso in casos:
         print('numero de celulas: ', numCelulas)
         print('distancia: ',distancia)
-        pares(numCelulas,distancia,caso)  # Llamar a la función
+        allpairs=pares(numCelulas,distancia,caso)  # Llamar a la función
+        pairs=createPairs(distancia,caso,allpairs)
+        print(pairs)
